@@ -40,9 +40,13 @@ app.post('/register', (req, res) => {
     // 회원가입할 때 필요한 정보들을 client에서 가져오면, 
     // 그것들을 DB에 넣어준다!.
     const user = new User(req.body);    // body parser가 있어서 req.body에 parse되어서 들어감. 
+
+    
+    // console.log("req.body: ", req.body)
     user.save((err, userInfo) => {
         if(err) return res.json({ success: false, err })
         // error 발생 시 json 형식으로 success하지 못했다 + 에러메시지도 함께 전달
+        console.log("userpassword = ", req.body.password);
         return res.status(200).json({
             success : true
         })
