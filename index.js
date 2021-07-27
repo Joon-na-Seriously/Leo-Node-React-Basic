@@ -46,7 +46,6 @@ app.post('/register', (req, res) => {
     user.save((err, userInfo) => {
         if(err) return res.json({ success: false, err })
         // error 발생 시 json 형식으로 success하지 못했다 + 에러메시지도 함께 전달
-        console.log("userpassword = ", req.body.password);
         return res.status(200).json({
             success : true
         })
