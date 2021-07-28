@@ -108,6 +108,21 @@ app.get('api/users/auth', auth , (req, res) => {
     })
 })
 
+app.get('/api/users/logout', auth, (req, res) => {
+    // 로그인된 상태이므로 auth를 middleware로 넣어준다
+
+    User.findOneAndUpdate({_id : req.user._id},
+        // 찾을 때는 id로 찾는데, auth middleware에서 가져온 id
+        { token : ""},
+        // 이 작업을 통해 DB에 있는 token을 없애준다
+        (err, user) => {
+            if (err) return res.json( {success: false, err});
+            return res.status(200).send({
+                success: true
+            });
+        });
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
