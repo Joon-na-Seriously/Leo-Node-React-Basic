@@ -15,6 +15,8 @@ const cookieParser = require('cookie-parser');
 const config = require('./config/key');  
 
 const { User } = require("./models/User");
+const { auth } = require("./middleware/auth");
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -38,7 +40,7 @@ app.get('/', (req, res) => {
   // root directory에 "hello world" 가 출력될 수 있게 해주는 것.
 })
 
-app.post('/register', (req, res) => {
+app.post('api/users/register', (req, res) => {
     // 회원가입할 때 필요한 정보들을 client에서 가져오면, 
     // 그것들을 DB에 넣어준다!.
     const user = new User(req.body);    // body parser가 있어서 req.body에 parse되어서 들어감. 
@@ -54,7 +56,7 @@ app.post('/register', (req, res) => {
     })
 })
 
-app.post('/login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
     // 1. 요청된 email가 DB에 있는지 확인
     User.findOne({ email : req.body.email }, (err, user) => {
         if (!user) {
@@ -86,6 +88,26 @@ app.post('/login', (req, res) => {
         });
     });
 });
+
+// 인증과 관련된 부분은 복잡hae..
+app.get('api/users/auth', auth , (req, res) => {
+    // auth => MiddleWare 
+    // MiddleWare란, endpoint에서 request를 받은 다음에 callback function하기 전에 중간에서 무언가 해주는 것
+
+    // 지금부터 middleware를 통과했을 때 실행되는 code들 => authentication이 true인 것들
+    // authentication에 성공했다는 것을 client에 전달해주어야 함
+    res.status(200).json({
+        _id: req.user._id,
+        isAdmin : req.user.role === 0 ? false : true,
+        isAuth : true,
+        email : req.user.email,
+        name : req.user.name,
+        lastname : req.user.lastname,
+        role : req.user.role,
+        image : req.user.image
+    })
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
