@@ -38,7 +38,13 @@ mongoose.connect(config.mongoURI,
 app.get('/', (req, res) => {
   res.send('Hello World!' + "\n안녕하세요! 새해복 많이받으세요! d아아아")
   // root directory에 "hello world" 가 출력될 수 있게 해주는 것.
-})
+});
+
+app.get('/api/hello', (req, res) => {
+
+    res.send("안녕하세요.");
+});
+
 
 app.post('api/users/register', (req, res) => {
     // 회원가입할 때 필요한 정보들을 client에서 가져오면, 
