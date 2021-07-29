@@ -1,7 +1,7 @@
 // back end가 시작할 때 여기서 시작함. (백 엔드의 시작점)
 // express js는 node js의 프레임워크
 
-const accountInfo = require("./secret");
+const accountInfo = require("../secret");
 
 
 const express = require('express')
