@@ -5,11 +5,10 @@ import { combineReducers } from "redux";
 // 그러므로 User에 관한 state, subscribe에 관한 state 등 여러가지 state로 나누어져 있으므로 reducer도 여러가지
 // 따라서 combineReducers로 root reducer로 하나로 합쳐주는 것 (관리하기 편하도록)
 
-// import user from './user-reducer';
+import user from './user_reducer';
 
 const rootReducer = combineReducers({
-    // user, 
-
+    user
 })
 
 export default rootReducer; 
