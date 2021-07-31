@@ -3,7 +3,6 @@ import Axios from 'axios';
 import {useDispatch} from 'react-redux';
 // dispatch를 이용해서 action을 짜는 것
 import {loginUser} from '../../../_actions/user_action';
-import { response } from 'express';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 function LoginPage(props) {
