@@ -1,6 +1,6 @@
 // login 기능이나 register 기능
 
-import { LOGIN_USER, REGISTER_USER } from "../_actions/types";
+import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "../_actions/types";
 
 // 전 state과 현재 action을 다음 state로 돌려주어야 함
 export default function (state = {}, action) {
@@ -13,7 +13,10 @@ export default function (state = {}, action) {
         case REGISTER_USER:
             return {...state, register: action.payload};
             break;
-
+        
+        case AUTH_USER:
+            return {...state, userData: action.payload};
+            break;
 
         default: 
             return state;

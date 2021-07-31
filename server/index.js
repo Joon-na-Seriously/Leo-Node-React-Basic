@@ -96,7 +96,7 @@ app.post('/api/users/login', (req, res) => {
 });
 
 // 인증과 관련된 부분은 복잡hae..
-app.get('api/users/auth', auth , (req, res) => {
+app.get('/api/users/auth', auth , (req, res) => {
     // auth => MiddleWare 
     // MiddleWare란, endpoint에서 request를 받은 다음에 callback function하기 전에 중간에서 무언가 해주는 것
 
